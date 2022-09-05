@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <public name="baseColor" type="attr" />
+    <public name="highlightColor" type="attr" />
+    <public name="tilt" type="attr" />
+</resources>
