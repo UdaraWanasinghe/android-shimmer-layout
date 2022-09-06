@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <public name="baseColor" type="attr" />
-    <public name="highlightColor" type="attr" />
-    <public name="tilt" type="attr" />
+    <public name="shimmerBaseColor" type="attr" />
+    <public name="shimmerHighlightColor" type="attr" />
+    <public name="shimmerTilt" type="attr" />
+    <public name="shimmerEnabled" type="attr" />
+    <public name="shimmerGradientStart" type="attr" />
+    <public name="shimmerGradientEnd" type="attr" />
 </resources>

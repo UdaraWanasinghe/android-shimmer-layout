@@ -21,7 +21,7 @@ class ShimmerLayout @JvmOverloads constructor(
         xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN)
     }
     private val shimmerColors: IntArray
-    private val colorPositions: FloatArray
+    private val shimmerColorPositions: FloatArray = floatArrayOf(0f, 0.45f, 0.55f, 1f)
     private val shimmerAnimator: ValueAnimator
     private val shaderMatrix = Matrix()
     private val stateListeners = mutableListOf<ShimmerStateListener>()
@@ -29,24 +29,25 @@ class ShimmerLayout @JvmOverloads constructor(
         invalidate()
     }
 
-    @Suppress("unused")
-    val isShimmerEnabled: Boolean
-        get() = shimmerEnabled
+    val isShimmerEnabled get() = shimmerEnabled
 
-    @Suppress("unused")
-    val isShimmerPlaying: Boolean
-        get() = !shimmerAnimator.isPaused
-    
+    val isShimmerPlaying get() = !shimmerAnimator.isPaused
+
+    val shimmerGradientStart get() = shimmerColorPositions[1]
+
+    val shimmerGradientEnd get() = shimmerColorPositions[2]
+
     init {
         context.obtainStyledAttributes(attrs, R.styleable.ShimmerLayout).apply {
             shimmerBaseColor = getColor(R.styleable.ShimmerLayout_shimmerBaseColor, 0x4cffffff)
             shimmerHighlightColor = getColor(R.styleable.ShimmerLayout_shimmerHighlightColor, Color.WHITE)
             shimmerTilt = getFloat(R.styleable.ShimmerLayout_shimmerTilt, 45f).toDouble()
             shimmerEnabled = getBoolean(R.styleable.ShimmerLayout_shimmerEnabled, true)
+            shimmerColorPositions[1] = getFloat(R.styleable.ShimmerLayout_shimmerGradientStart, 0.45f)
+            shimmerColorPositions[2] = getFloat(R.styleable.ShimmerLayout_shimmerGradientEnd, 0.55f)
             recycle()
         }
         shimmerColors = intArrayOf(shimmerBaseColor, shimmerHighlightColor, shimmerHighlightColor, shimmerBaseColor)
-        colorPositions = floatArrayOf(0f, 0.45f, 0.55f, 1f)
         shimmerAnimator = ValueAnimator.ofFloat(0f, 1f)
         shimmerAnimator.addUpdateListener(animUpdateListener)
         shimmerAnimator.duration = 1000
@@ -58,40 +59,55 @@ class ShimmerLayout @JvmOverloads constructor(
         }
     }
 
-    @Suppress("unused")
     fun addShimmerStateListener(listener: ShimmerStateListener) {
         stateListeners.add(listener)
     }
 
-    @Suppress("unused")
     fun removeShimmerStateListener(listener: ShimmerStateListener) {
         stateListeners.remove(listener)
     }
 
-    @Suppress("unused")
     fun startShimmer() {
         shimmerAnimator.start()
         shimmerEnabled = true
         notifyShimmerListeners(ShimmerState.STARTED)
     }
 
-    @Suppress("unused")
     fun pauseShimmer() {
         shimmerAnimator.pause()
         notifyShimmerListeners(ShimmerState.PAUSED)
     }
 
-    @Suppress("unused")
     fun resumeShimmer() {
         shimmerAnimator.resume()
         notifyShimmerListeners(ShimmerState.RESUMED)
     }
 
-    @Suppress("unused")
     fun stopShimmer() {
         shimmerAnimator.end()
         shimmerEnabled = false
         notifyShimmerListeners(ShimmerState.STOPPED)
+    }
+
+    fun setShimmerGradientStart(start: Float) {
+        shimmerColorPositions[1] = start
+        invalidate()
+    }
+
+    fun setShimmerGradientEnd(end: Float) {
+        shimmerColorPositions[2] = end
+        invalidate()
+    }
+
+    fun setShimmerGradientPositions(start: Float, end: Float) {
+        shimmerColorPositions[1] = start
+        shimmerColorPositions[2] = end
+        invalidate()
+    }
+
+    fun setShaderXfermode(xfermode: PorterDuffXfermode) {
+        shaderPaint.xfermode = xfermode
+        invalidate()
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -126,7 +142,7 @@ class ShimmerLayout @JvmOverloads constructor(
             width.toFloat(),
             0f,
             shimmerColors,
-            colorPositions,
+            shimmerColorPositions,
             Shader.TileMode.CLAMP
         )
     }

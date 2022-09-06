@@ -5,5 +5,7 @@
         <attr name="shimmerHighlightColor" format="color" />
         <attr name="shimmerTilt" format="float" />
         <attr name="shimmerEnabled" format="boolean" />
+        <attr name="shimmerGradientStart" format="float" />
+        <attr name="shimmerGradientEnd" format="float" />
     </declare-styleable>
 </resources>
