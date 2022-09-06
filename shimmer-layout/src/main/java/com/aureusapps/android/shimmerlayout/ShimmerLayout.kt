@@ -2,6 +2,7 @@ package com.aureusapps.android.shimmerlayout
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.content.res.TypedArray
 import android.graphics.*
 import android.util.AttributeSet
 import android.widget.FrameLayout
@@ -16,10 +17,7 @@ class ShimmerLayout @JvmOverloads constructor(
     private val shimmerTilt: Double
     private var shimmerEnabled: Boolean
 
-    private val shaderPaint = Paint().apply {
-        isAntiAlias = true
-        xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
-    }
+    private val shaderPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val shimmerColors: IntArray
     private val shimmerColorPositions: FloatArray = floatArrayOf(0f, 0.33f, 0.66f, 1f)
     private val shimmerAnimator: ValueAnimator
@@ -45,6 +43,7 @@ class ShimmerLayout @JvmOverloads constructor(
             shimmerEnabled = getBoolean(R.styleable.ShimmerLayout_shimmerEnabled, true)
             shimmerColorPositions[1] = getFloat(R.styleable.ShimmerLayout_shimmerGradientStart, 0.33f)
             shimmerColorPositions[2] = getFloat(R.styleable.ShimmerLayout_shimmerGradientEnd, 0.66f)
+            shaderPaint.xfermode = PorterDuffXfermode(getXfermode())
             recycle()
         }
         shimmerColors = intArrayOf(shimmerBaseColor, shimmerHighlightColor, shimmerHighlightColor, shimmerBaseColor)
@@ -149,6 +148,29 @@ class ShimmerLayout @JvmOverloads constructor(
 
     private fun offset(start: Float, end: Float, percent: Float): Float {
         return start + (end - start) * percent
+    }
+
+    private fun TypedArray.getXfermode(): PorterDuff.Mode {
+        return when (getInt(R.styleable.ShimmerLayout_shimmerXfermode, 5)) {
+            0 -> PorterDuff.Mode.CLEAR
+            1 -> PorterDuff.Mode.SRC
+            2 -> PorterDuff.Mode.DST
+            3 -> PorterDuff.Mode.SRC_OVER
+            4 -> PorterDuff.Mode.DST_OVER
+            5 -> PorterDuff.Mode.SRC_IN
+            6 -> PorterDuff.Mode.DST_IN
+            7 -> PorterDuff.Mode.SRC_OUT
+            8 -> PorterDuff.Mode.DST_OUT
+            9 -> PorterDuff.Mode.SRC_ATOP
+            10 -> PorterDuff.Mode.DST_ATOP
+            11 -> PorterDuff.Mode.XOR
+            12 -> PorterDuff.Mode.ADD
+            13 -> PorterDuff.Mode.MULTIPLY
+            14 -> PorterDuff.Mode.SCREEN
+            15 -> PorterDuff.Mode.OVERLAY
+            16 -> PorterDuff.Mode.DARKEN
+            else -> PorterDuff.Mode.LIGHTEN
+        }
     }
 
 }

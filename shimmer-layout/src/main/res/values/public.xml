@@ -6,4 +6,5 @@
     <public name="shimmerEnabled" type="attr" />
     <public name="shimmerGradientStart" type="attr" />
     <public name="shimmerGradientEnd" type="attr" />
+    <public name="shimmerXfermode" type="attr" />
 </resources>

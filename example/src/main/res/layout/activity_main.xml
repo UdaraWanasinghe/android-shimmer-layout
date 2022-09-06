@@ -75,7 +75,8 @@
         app:shimmerGradientEnd="0.33"
         app:shimmerGradientStart="0.66"
         app:shimmerHighlightColor="@color/purple_500"
-        app:shimmerTilt="0.9">
+        app:shimmerTilt="0.9"
+        app:shimmerXfermode="src_in">
 
         <TextView
             style="@style/TextAppearance.MaterialComponents.Headline3"
