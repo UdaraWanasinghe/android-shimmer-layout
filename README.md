@@ -55,3 +55,7 @@ Shimmer loading animation for android views.
 
     </com.aureusapps.android.shimmerlayout.ShimmerLayout>
    ```
+
+## Appreciate my work!
+
+<a href="https://www.buymeacoffee.com/udarawanasinghe" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
