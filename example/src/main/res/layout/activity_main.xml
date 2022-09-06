@@ -72,8 +72,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:shimmerBaseColor="@color/teal_200"
         app:shimmerEnabled="true"
-        app:shimmerGradientEnd="0.33"
-        app:shimmerGradientStart="0.66"
+        app:shimmerGradientEnd="0.66"
+        app:shimmerGradientStart="0.33"
         app:shimmerHighlightColor="@color/purple_500"
         app:shimmerTilt="0.9"
         app:shimmerXfermode="src_in">

@@ -10,7 +10,7 @@ Shimmer loading animation for android views.
     ```shell
     git clone https://github.com/UdaraWanasinghe/webp-android
     ```
-2. Run `gradle` task `publishToMavenLocal`
+2. Run `gradle` task `publishToMavenLocal`.
     ```shell
     sh gradlew publishToMavenLocal
     ```
@@ -38,11 +38,11 @@ Shimmer loading animation for android views.
     <com.aureusapps.android.shimmerlayout.ShimmerLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:shimmerBaseColor="@color/teal_200"
         app:shimmerEnabled="true"
-        app:shimmerGradientEnd="0.33"
-        app:shimmerGradientStart="0.66"
+        app:shimmerBaseColor="@color/teal_200"
         app:shimmerHighlightColor="@color/purple_500"
+        app:shimmerGradientStart="0.33"
+        app:shimmerGradientEnd="0.66"
         app:shimmerTilt="0.9"
         app:shimmerXfermode="src_in">
 
