@@ -8,4 +8,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="pink_400">#FFEC407A</color>
+    <color name="light_blue_200">#FF81D4FA</color>
+    <color name="deep_orange_200">#FFFFAB91</color>
+    <color name="light_green_400">#FF9CCC65</color>
 </resources>
