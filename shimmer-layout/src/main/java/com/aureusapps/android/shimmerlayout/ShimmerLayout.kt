@@ -18,10 +18,10 @@ class ShimmerLayout @JvmOverloads constructor(
 
     private val shaderPaint = Paint().apply {
         isAntiAlias = true
-        xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN)
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
     }
     private val shimmerColors: IntArray
-    private val shimmerColorPositions: FloatArray = floatArrayOf(0f, 0.45f, 0.55f, 1f)
+    private val shimmerColorPositions: FloatArray = floatArrayOf(0f, 0.33f, 0.66f, 1f)
     private val shimmerAnimator: ValueAnimator
     private val shaderMatrix = Matrix()
     private val stateListeners = mutableListOf<ShimmerStateListener>()
@@ -39,12 +39,12 @@ class ShimmerLayout @JvmOverloads constructor(
 
     init {
         context.obtainStyledAttributes(attrs, R.styleable.ShimmerLayout).apply {
-            shimmerBaseColor = getColor(R.styleable.ShimmerLayout_shimmerBaseColor, 0x4cffffff)
-            shimmerHighlightColor = getColor(R.styleable.ShimmerLayout_shimmerHighlightColor, Color.WHITE)
+            shimmerBaseColor = getColor(R.styleable.ShimmerLayout_shimmerBaseColor, Color.LTGRAY)
+            shimmerHighlightColor = getColor(R.styleable.ShimmerLayout_shimmerHighlightColor, Color.BLACK)
             shimmerTilt = getFloat(R.styleable.ShimmerLayout_shimmerTilt, 45f).toDouble()
             shimmerEnabled = getBoolean(R.styleable.ShimmerLayout_shimmerEnabled, true)
-            shimmerColorPositions[1] = getFloat(R.styleable.ShimmerLayout_shimmerGradientStart, 0.45f)
-            shimmerColorPositions[2] = getFloat(R.styleable.ShimmerLayout_shimmerGradientEnd, 0.55f)
+            shimmerColorPositions[1] = getFloat(R.styleable.ShimmerLayout_shimmerGradientStart, 0.33f)
+            shimmerColorPositions[2] = getFloat(R.styleable.ShimmerLayout_shimmerGradientEnd, 0.66f)
             recycle()
         }
         shimmerColors = intArrayOf(shimmerBaseColor, shimmerHighlightColor, shimmerHighlightColor, shimmerBaseColor)
@@ -112,7 +112,7 @@ class ShimmerLayout @JvmOverloads constructor(
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        createShader(width)
+        shaderPaint.shader = createShader(width)
     }
 
     override fun dispatchDraw(canvas: Canvas) {
@@ -135,8 +135,8 @@ class ShimmerLayout @JvmOverloads constructor(
         stateListeners.forEach { it.onStateChanged(state) }
     }
 
-    private fun createShader(width: Int) {
-        shaderPaint.shader = LinearGradient(
+    private fun createShader(width: Int): Shader {
+        return LinearGradient(
             0f,
             0f,
             width.toFloat(),

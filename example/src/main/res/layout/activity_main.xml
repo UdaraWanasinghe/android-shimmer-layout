@@ -14,7 +14,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shimmerEnabled="true">
+        app:shimmerBaseColor="@color/teal_200"
+        app:shimmerEnabled="true"
+        app:shimmerGradientEnd="0.33"
+        app:shimmerGradientStart="0.66"
+        app:shimmerHighlightColor="@color/purple_500"
+        app:shimmerTilt="0.9">
 
         <TextView
             style="@style/TextAppearance.MaterialComponents.Headline3"
