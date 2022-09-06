@@ -1,5 +1,7 @@
 ## Shimmer Layout
 
+[![android library](https://img.shields.io/badge/version-v1.0.0-orange)](https://github.com/UdaraWanasinghe/shimmer-layout)
+
 Shimmer loading animation for android views.
 
 ## Building
