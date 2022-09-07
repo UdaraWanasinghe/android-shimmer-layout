@@ -12,6 +12,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Shimmer Layout"
+rootProject.name = "shimmer-layout"
 include ':example'
 include ':shimmer-layout'
