@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.*
 import android.util.AttributeSet
+import android.view.View
 import android.widget.FrameLayout
 import kotlin.math.tan
 
@@ -35,6 +36,8 @@ class ShimmerLayout @JvmOverloads constructor(
 
     val shimmerGradientEnd get() = shimmerColorPositions[2]
 
+    private var hardPaused: Boolean = false
+
     init {
         context.obtainStyledAttributes(attrs, R.styleable.ShimmerLayout).apply {
             shimmerBaseColor = getColor(R.styleable.ShimmerLayout_shimmerBaseColor, Color.LTGRAY)
@@ -56,6 +59,19 @@ class ShimmerLayout @JvmOverloads constructor(
         if (shimmerEnabled) {
             shimmerAnimator.start()
         }
+        addOnAttachStateChangeListener(object : OnAttachStateChangeListener {
+            override fun onViewAttachedToWindow(v: View?) {
+                if (shimmerAnimator.isPaused && !hardPaused) {
+                    shimmerAnimator.resume()
+                }
+            }
+
+            override fun onViewDetachedFromWindow(v: View?) {
+                if (shimmerAnimator.isRunning) {
+                    shimmerAnimator.pause()
+                }
+            }
+        })
     }
 
     fun addShimmerStateListener(listener: ShimmerStateListener) {
@@ -75,11 +91,13 @@ class ShimmerLayout @JvmOverloads constructor(
     fun pauseShimmer() {
         shimmerAnimator.pause()
         notifyShimmerListeners(ShimmerState.PAUSED)
+        hardPaused = true
     }
 
     fun resumeShimmer() {
         shimmerAnimator.resume()
         notifyShimmerListeners(ShimmerState.RESUMED)
+        hardPaused = false
     }
 
     fun stopShimmer() {
