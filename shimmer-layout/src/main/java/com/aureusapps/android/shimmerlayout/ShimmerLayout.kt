@@ -9,9 +9,12 @@ import android.view.View
 import android.widget.FrameLayout
 import kotlin.math.tan
 
-class ShimmerLayout @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null
-) : FrameLayout(context, attrs) {
+open class ShimmerLayout @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+    defStyleRes: Int = 0
+) : FrameLayout(context, attrs, defStyleAttr, defStyleRes) {
 
     private val shimmerBaseColor: Int
     private val shimmerHighlightColor: Int
@@ -41,15 +44,22 @@ class ShimmerLayout @JvmOverloads constructor(
     init {
         context.obtainStyledAttributes(attrs, R.styleable.ShimmerLayout).apply {
             shimmerBaseColor = getColor(R.styleable.ShimmerLayout_shimmerBaseColor, Color.LTGRAY)
-            shimmerHighlightColor = getColor(R.styleable.ShimmerLayout_shimmerHighlightColor, Color.BLACK)
+            shimmerHighlightColor =
+                getColor(R.styleable.ShimmerLayout_shimmerHighlightColor, Color.BLACK)
             shimmerTilt = getFloat(R.styleable.ShimmerLayout_shimmerTilt, 45f).toDouble()
             shimmerEnabled = getBoolean(R.styleable.ShimmerLayout_shimmerEnabled, true)
-            shimmerColorPositions[1] = getFloat(R.styleable.ShimmerLayout_shimmerGradientStart, 0.33f)
+            shimmerColorPositions[1] =
+                getFloat(R.styleable.ShimmerLayout_shimmerGradientStart, 0.33f)
             shimmerColorPositions[2] = getFloat(R.styleable.ShimmerLayout_shimmerGradientEnd, 0.66f)
             shaderPaint.xfermode = PorterDuffXfermode(getXfermode())
             recycle()
         }
-        shimmerColors = intArrayOf(shimmerBaseColor, shimmerHighlightColor, shimmerHighlightColor, shimmerBaseColor)
+        shimmerColors = intArrayOf(
+            shimmerBaseColor,
+            shimmerHighlightColor,
+            shimmerHighlightColor,
+            shimmerBaseColor
+        )
         shimmerAnimator = ValueAnimator.ofFloat(0f, 1f)
         shimmerAnimator.addUpdateListener(animUpdateListener)
         shimmerAnimator.duration = 1000
