@@ -10,10 +10,7 @@ import android.widget.FrameLayout
 import kotlin.math.tan
 
 open class ShimmerLayout @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0,
-    defStyleRes: Int = 0
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr, defStyleRes) {
 
     private val shimmerBaseColor: Int
@@ -55,10 +52,7 @@ open class ShimmerLayout @JvmOverloads constructor(
             recycle()
         }
         shimmerColors = intArrayOf(
-            shimmerBaseColor,
-            shimmerHighlightColor,
-            shimmerHighlightColor,
-            shimmerBaseColor
+            shimmerBaseColor, shimmerHighlightColor, shimmerHighlightColor, shimmerBaseColor
         )
         shimmerAnimator = ValueAnimator.ofFloat(0f, 1f)
         shimmerAnimator.addUpdateListener(animUpdateListener)
@@ -93,24 +87,28 @@ open class ShimmerLayout @JvmOverloads constructor(
     }
 
     fun startShimmer() {
+        if (shimmerAnimator.isRunning) return
         shimmerAnimator.start()
         shimmerEnabled = true
         notifyShimmerListeners(ShimmerState.STARTED)
     }
 
     fun pauseShimmer() {
+        if (shimmerAnimator.isPaused) return
         shimmerAnimator.pause()
         notifyShimmerListeners(ShimmerState.PAUSED)
         hardPaused = true
     }
 
     fun resumeShimmer() {
+        if (!shimmerAnimator.isPaused) return
         shimmerAnimator.resume()
         notifyShimmerListeners(ShimmerState.RESUMED)
         hardPaused = false
     }
 
     fun stopShimmer() {
+        if (!shimmerAnimator.isRunning) return
         shimmerAnimator.end()
         shimmerEnabled = false
         notifyShimmerListeners(ShimmerState.STOPPED)
@@ -164,13 +162,7 @@ open class ShimmerLayout @JvmOverloads constructor(
 
     private fun createShader(width: Int): Shader {
         return LinearGradient(
-            0f,
-            0f,
-            width.toFloat(),
-            0f,
-            shimmerColors,
-            shimmerColorPositions,
-            Shader.TileMode.CLAMP
+            0f, 0f, width.toFloat(), 0f, shimmerColors, shimmerColorPositions, Shader.TileMode.CLAMP
         )
     }
 
