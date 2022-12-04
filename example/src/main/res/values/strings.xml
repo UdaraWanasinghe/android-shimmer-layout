@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">Shimmer Layout</string>
+    <string name="app_name">shimmer-layout</string>
     <string name="hello_world">Hello World</string>
 </resources>
