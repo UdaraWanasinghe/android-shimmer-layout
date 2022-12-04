@@ -4,6 +4,9 @@
 
 Shimmer loading animation for android views.
 
+## Screen Records
+<img src="https://github.com/UdaraWanasinghe/android-shimmer-layout/blob/main/resources/screen-records/screen-record.gif?raw=true" width=360>
+
 ## Building
 
 1. Clone this repository.
