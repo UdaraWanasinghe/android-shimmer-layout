@@ -10,7 +10,10 @@ import android.widget.FrameLayout
 import kotlin.math.tan
 
 open class ShimmerLayout @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+    defStyleRes: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr, defStyleRes) {
 
     private val shimmerBaseColor: Int
@@ -63,19 +66,21 @@ open class ShimmerLayout @JvmOverloads constructor(
         if (shimmerEnabled) {
             shimmerAnimator.start()
         }
-        addOnAttachStateChangeListener(object : OnAttachStateChangeListener {
-            override fun onViewAttachedToWindow(v: View?) {
-                if (shimmerAnimator.isPaused && !hardPaused) {
-                    shimmerAnimator.resume()
+        addOnAttachStateChangeListener(
+            object : OnAttachStateChangeListener {
+                override fun onViewAttachedToWindow(v: View) {
+                    if (shimmerAnimator.isPaused && !hardPaused) {
+                        shimmerAnimator.resume()
+                    }
                 }
-            }
 
-            override fun onViewDetachedFromWindow(v: View?) {
-                if (shimmerAnimator.isRunning) {
-                    shimmerAnimator.pause()
+                override fun onViewDetachedFromWindow(v: View) {
+                    if (shimmerAnimator.isRunning) {
+                        shimmerAnimator.pause()
+                    }
                 }
             }
-        })
+        )
     }
 
     fun addShimmerStateListener(listener: ShimmerStateListener) {
