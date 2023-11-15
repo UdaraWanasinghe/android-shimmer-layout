@@ -30,5 +30,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "shimmer-layout"
+rootProject.name = "android-shimmer-layout"
 include("shimmer-layout", "example")
