@@ -1,4 +1,4 @@
-package com.aureusapps.android.shimmerlayout
+package com.aureusapps.android.shimmerlayout.example
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -1,6 +1,6 @@
 ## Shimmer Layout
 
-[![android library](https://img.shields.io/badge/version-v1.0.0-orange)](https://github.com/UdaraWanasinghe/shimmer-layout)
+[![android library](https://img.shields.io/badge/version-v1.0.0-orange)](https://github.com/UdaraWanasinghe/android-shimmer-layout)
 
 Shimmer loading animation for android views.
 
@@ -11,7 +11,7 @@ Shimmer loading animation for android views.
 
 1. Clone this repository.
     ```shell
-    git clone https://github.com/UdaraWanasinghe/webp-android
+    git clone https://github.com/UdaraWanasinghe/android-shimmer-layout
     ```
 2. Run `gradle` task `publishToMavenLocal`.
     ```shell
@@ -22,7 +22,7 @@ Shimmer loading animation for android views.
 
 1. Add the `mavenLocal` repository to your project.
     ```groovy
-    // settings.gradle
+    // settings.gradle.kts
     dependencyResolutionManagement {
         repositories {
             mavenLocal()
@@ -31,9 +31,9 @@ Shimmer loading animation for android views.
     ```
 2. Import the library to your project.
     ```groovy
-    // module level build.gradle
+    // module level build.gradle.kts
     dependencies {
-        implementation 'com.aureusapps.android:shimmer-layout:1.0.0'
+        implementation("com.aureusapps.android:shimmer-layout:1.0.0")
     }
     ```
 3. Wrap your views with `ShimmerLayout`.
