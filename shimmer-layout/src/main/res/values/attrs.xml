@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="shimmerLayoutStyle" format="reference" />
     <declare-styleable name="ShimmerLayout">
         <attr name="shimmerBaseColor" format="color" />
         <attr name="shimmerHighlightColor" format="color" />
@@ -7,6 +8,7 @@
         <attr name="shimmerEnabled" format="boolean" />
         <attr name="shimmerGradientStart" format="float" />
         <attr name="shimmerGradientEnd" format="float" />
+        <attr name="shimmerDuration" format="integer" />
         <attr name="shimmerXfermode" format="enum">
             <enum name="clear" value="0" />
             <enum name="src" value="1" />

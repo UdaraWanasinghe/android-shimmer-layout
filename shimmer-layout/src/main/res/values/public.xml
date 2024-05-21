@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <public name="shimmerLayoutStyle" type="attr" />
     <public name="shimmerBaseColor" type="attr" />
     <public name="shimmerHighlightColor" type="attr" />
     <public name="shimmerTilt" type="attr" />
     <public name="shimmerEnabled" type="attr" />
     <public name="shimmerGradientStart" type="attr" />
     <public name="shimmerGradientEnd" type="attr" />
+    <public name="shimmerDuration" type="attr" />
     <public name="shimmerXfermode" type="attr" />
     <public name="ShimmerLayout" type="layout" />
+    <public name="BaseShimmerLayoutStyle" type="style" />
 </resources>

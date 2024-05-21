@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BaseShimmerLayoutStyle">
+        <item name="shimmerBaseColor">@color/ltgray</item>
+        <item name="shimmerHighlightColor">@android:color/black</item>
+        <item name="shimmerTilt">45.0</item>
+        <item name="shimmerEnabled">true</item>
+        <item name="shimmerGradientStart">0.33</item>
+        <item name="shimmerGradientEnd">0.66</item>
+        <item name="shimmerDuration">1000</item>
+        <item name="shimmerXfermode">src_in</item>
+    </style>
+
+</resources>

@@ -1,6 +1,8 @@
 @file:Suppress("UnstableApiUsage")
 
 import com.aureusapps.gradle.PublishLibraryConstants.GROUP_ID
+import com.aureusapps.gradle.PublishLibraryConstants.VERSION_CODE
+import com.aureusapps.gradle.PublishLibraryConstants.VERSION_NAME
 
 plugins {
     id("com.android.application")
@@ -9,20 +11,21 @@ plugins {
 }
 
 class Props(project: Project) {
-    private val groupId = project.findProperty(GROUP_ID)
-    val packageName = "$groupId.shimmerlayout.example"
+    val groupId = project.findProperty(GROUP_ID)
+    val versionCode = project.findProperty(VERSION_CODE) as Int
+    val versionName = project.findProperty(VERSION_NAME) as String
 }
 
 val props = Props(project)
 
 android {
-    namespace = props.packageName
+    namespace = "${props.groupId}.shimmerlayout.example"
     compileSdk = 34
     defaultConfig {
-        applicationId = props.packageName
+        applicationId = "${props.groupId}.shimmerlayout.example"
         minSdk = 21
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = props.versionCode
+        versionName = props.versionName
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -47,14 +50,9 @@ android {
 }
 
 dependencies {
-    implementation(libs.core.ktx)
-    implementation(libs.appcompat)
-    implementation(libs.material)
-    implementation(libs.constraintlayout)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.android.material)
+    implementation(libs.androidx.constraintlayout)
     implementation(project(":shimmer-layout"))
-
-    testImplementation(libs.junit)
-
-    androidTestImplementation(libs.junit)
-    androidTestImplementation(libs.espresso.core)
 }
